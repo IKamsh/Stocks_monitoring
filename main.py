@@ -4,6 +4,8 @@ import os
 # Your https://www.alphavantage.co/ API key
 # ot use the following string of code add STOCK_API_KEY variable
 # to the environment variables (or just substitute API key directly to code)
+# to add variable write to console $ export STOCK_API_KEY=KEY
+# or in windows > set STOCK_API_KEY=KEY
 STOCK_API_KEY = os.environ.get("STOCK_API_KEY")
 
 
