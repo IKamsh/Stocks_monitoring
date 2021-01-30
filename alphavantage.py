@@ -2,12 +2,10 @@ import requests
 import os
 
 
-# https://habr.com/ru/company/ods/blog/327242/
 # Your https://www.alphavantage.co/ API key
 # or use the following string of code add STOCK_API_KEY variable
 # to the environment variables (or just substitute API key directly to code)
-#STOCK_API_KEY = os.environ.get("STOCK_API_KEY")
-STOCK_API_KEY = 'KJOJHXF1H6A6VV2W'
+STOCK_API_KEY = os.environ.get("STOCK_API_KEY")
 
 class API_exception(BaseException):
     pass
