@@ -58,7 +58,7 @@ def get_intraday(ticker, interval="5min", adjusted=True, output_size="full"):
 def get_price(time_dict, price_type="3. low", chronically=True):
     """
     time_dict - dictionary that is output of get_daily etc. functions
-    price_type - possible values \in ['1. open', '2. high', '3. low', '4. close']
+    price_type - possible values in ['1. open', '2. high', '3. low', '4. close']
     chronically - if True return data in chronical order (first - oldest)
     return list with price data
     """
@@ -78,7 +78,7 @@ def get_price(time_dict, price_type="3. low", chronically=True):
 def get_price_oc(time_dict, price_type="3. low", chronically=True):
     """
     time_dict - dictionary that is output of get_daily etc. functions
-    price_type - possible values \in ['1. open', '2. high', '3. low', '4. close']
+    price_type - possible values in ['1. open', '2. high', '3. low', '4. close']
     chronically - if True return data in chronical order (first - oldest)
     return list with open and close prices
     """
