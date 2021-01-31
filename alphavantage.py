@@ -1,13 +1,13 @@
 import requests
 import os
+import pandas as pd
 
 
-# https://habr.com/ru/company/ods/blog/327242/
 # Your https://www.alphavantage.co/ API key
 # or use the following string of code add STOCK_API_KEY variable
 # to the environment variables (or just substitute API key directly to code)
-#STOCK_API_KEY = os.environ.get("STOCK_API_KEY")
-STOCK_API_KEY = 'KJOJHXF1H6A6VV2W'
+STOCK_API_KEY = os.environ.get("STOCK_API_KEY")
+
 
 class API_exception(BaseException):
     pass
@@ -21,9 +21,9 @@ def request(params):
     return response
 
 
-def get_daily(ticker, output_size="compact"):
+def get_daily(ticker, output_size="full"):
     '''
-    output_size = "compact" by default (return only 100 data points), use "full"
+    output_size = "full" by default (return only 100 data points), use "compact"
     to get all data
     return dictionary with price info
     '''
@@ -36,9 +36,9 @@ def get_daily(ticker, output_size="compact"):
     return request(params)
 
 
-def get_intraday(ticker, interval="5min", adjusted=True, output_size="compact"):
+def get_intraday(ticker, interval="5min", adjusted=True, output_size="full"):
     '''
-    output_size = "compact" by default (return only 100 data points), use "full"
+    output_size = "full" by default (return only 100 data points), use "compact"
     to get all data
     return dictionary with price info
     '''
@@ -95,3 +95,24 @@ def get_price_oc(time_dict, price_type="3. low", chronically=True):
         return price[::-1]
 
     return price
+
+
+def get_pandas_data(time_dict, chronically=True):
+    """
+    time_dict - dictionary that is output of get_daily etc. functions
+    chronically - if True return data in chronical order (first - oldest)
+    return pandas representaion with rows as time and prices and volum
+    as columns
+    """
+    assert type(time_dict) == dict
+    
+    time = list(time_dict.keys())[-1]
+    data = pd.DataFrame(time_dict[time]).transpose()
+    data = data.apply(pd.to_numeric)
+    data.index.name = "date"
+    
+    if chronically:
+        data = data[::-1]
+    
+    return data.rename(columns={'1. open': 'open', '2. high': 'high',
+                            '3. low': 'low', '4. close': 'close', '5. volume': 'volume'})
