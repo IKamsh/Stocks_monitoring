@@ -4,8 +4,10 @@ import pandas as pd
 
 
 # Your https://www.alphavantage.co/ API key
-# or use the following string of code add STOCK_API_KEY variable
-# to the environment variables (or just substitute API key directly to code)
+# add STOCK_API_KEY to the environment variables
+# linux: export STOCK_API_KEY=var
+# windows: set STOCK_API_KEY=var
+# (or just substitute API key directly to code)
 STOCK_API_KEY = os.environ.get("STOCK_API_KEY")
 
 
